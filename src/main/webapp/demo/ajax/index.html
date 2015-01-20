@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../ExtJS/resources/css/ext-all.css" />
+ 	<script type="text/javascript" src="../ExtJS/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="../ExtJS/ext-all.js"></script>
+<title>AJAX DEMO</title>
+</head>
+
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	
+	Ext.Ajax.request({
+		method:'POST',
+		url:'ajax.jsp',
+		params:{
+			key:'kitty'
+		},
+		success:function(response){
+			var t = response.responseText;
+			Ext.Msg.alert(t,t);
+		},
+		failure:function(response){
+			
+		}
+	});
+});
+</script>
+
+</body>
+</html>

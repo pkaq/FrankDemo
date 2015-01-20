@@ -1,0 +1,51 @@
+apply plugin: "war"
+
+group = "com.frank.wu"
+//版本号
+version = "1.0.0"
+//防止乱码
+[ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
+//指定编译版本
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    maven { url "http://repo.maven.apache.org/maven2" }
+    //maven { url " http://maven.oschina.net/content/groups/public" }
+   
+}
+
+dependencies {
+	//spring版本
+	def springVersion = "+"
+	//Srping MVC支持
+    compile( "org.springframework:spring-context:${springVersion}") {
+       		  exclude(module: "commons-logging")
+    }
+    compile  	"org.springframework:spring-webmvc:${springVersion}",
+              	"org.springframework:spring-jdbc:${springVersion}",
+              	"org.springframework:spring-tx:${springVersion}",
+              	 //JSTL依赖
+              	 "jstl:jstl:1.2",
+	    		//CXF依赖
+	          	"org.apache.cxf:cxf-rt-frontend-jaxws:+",
+	          	"org.apache.cxf:cxf-rt-transports-http:+",
+	          	"org.apache.cxf:cxf-rt-transports-http-jetty:+",
+	          	//CAS客户端依赖
+	          	"org.jasig.cas.client:cas-client-core:+",
+	          	//druid依赖
+	          	"com.alibaba:druid:+",
+	          	//quartz定时调度
+	          	"org.quartz-scheduler:quartz:1.8.6",
+	          	//apache io工具包,该包提供了FileWriterWithEncoding等工具类
+	          	"commons-io:commons-io:+",
+	          	//POI依赖
+	          	"org.apache.poi:poi-ooxml:3.10+"
+          	
+    testCompile 	 "junit:junit:4.7"
+    providedCompile  "javax.servlet:servlet-api:2.5"
+    providedCompile  "javax.servlet.jsp:jsp-api:2.1"
+    //本地依赖
+    compile fileTree(dir: "lib", include: "*.jar")
+}
+

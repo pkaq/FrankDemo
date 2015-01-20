@@ -1,0 +1,18 @@
+{
+    metaData: {
+        idProperty: 'id',
+        root: 'rows',
+        totalProperty: 'results',
+        fields: [
+            {name: 'name'},
+            {name: 'job', mapping: 'occupation'}
+        ],
+        sortInfo: {field: 'name', direction:'ASC'}, // used by store to set its sortInfo
+        foo: 'bar' // custom property
+    },
+    results: 2,
+    rows: [
+        { 'id': 1, 'name': 'Bill', occupation: 'Gardener' },
+        { 'id': 2, 'name': 'Ben', occupation: 'Horticulturalist' }
+    ]
+}
