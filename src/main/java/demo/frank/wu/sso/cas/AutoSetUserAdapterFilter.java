@@ -1,6 +1,7 @@
 package demo.frank.wu.sso.cas;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -10,6 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.jasig.cas.client.validation.Assertion;
 
 /**
@@ -40,16 +42,26 @@ public class AutoSetUserAdapterFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 
 		// _const_cas_assertion_是CAS中存放登录用户名的session标志
-		Object object = httpRequest.getSession().getAttribute("_const_cas_assertion_");
-		System.out.println("-------------" + object);
-		if (object != null) {
-			Assertion assertion = (Assertion) object;
-			String loginName = assertion.getPrincipal().getName();
-			System.out.println("-------------" + object);
-			// 第一次登录系统
-			System.err.println(loginName);
+//		Object object = httpRequest.getSession().getAttribute("_const_cas_assertion_");
+		
+		AttributePrincipal principal = (AttributePrincipal) httpRequest.getUserPrincipal(); 
+		Map attributes = principal.getAttributes();
+		
+		String username=(String) attributes.get("username");
+		String loginName = (String) attributes.get("loginname");
+		
+		System.err.println("username :  " + username);
+		System.err.println("loginname : " + loginName);
 
-		}
+//		System.out.println("-------------" + object);
+//		if (object != null) {
+//			Assertion assertion = (Assertion) object;
+//			String loginName = assertion.getPrincipal().getName();
+//			System.out.println("-------------" + object);
+//			// 第一次登录系统
+//			System.err.println(loginName);
+//
+//		}
 		chain.doFilter(request, response);
 
 	}

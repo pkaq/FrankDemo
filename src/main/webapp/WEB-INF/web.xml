@@ -44,9 +44,12 @@
     <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  <listener>
+  <!-- 单点登陆配置开始 -->
+  <!-- 用于单点退出，该过滤器用于实现单点登出功能，可选配置-->
+ <!--  <listener>
     <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
   </listener>
+  该过滤器用于实现单点登出功能，可选配置。
   <filter>
     <filter-name>CAS Single Sign Out Filter</filter-name>
     <filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
@@ -55,13 +58,21 @@
     <filter-name>CAS Single Sign Out Filter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  该过滤器负责用户的认证工作，必须启用它
   <filter>
     <filter-name>CASFilter</filter-name>
     <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
+    服务器登陆页面url 
+     	 casServerUrlPrefix  参数的值是cas 服务的访问地址。cas client 验证ticket 的时候，
+		  要访问cas 服务的/serviceValidate 接口，使用的url 就是${ casServerUrlPrefix }serviceValidate ，
+		  因为客户web 应用要验证cas 的证书，所以证书cn 字段的值必须和casServerUrlPrefix 里设置的cas 服务器的域名保持一致，
+		  并且在web 应用的服务器上配置cas 服务的访问域名。 
+	
     <init-param>
       <param-name>casServerLoginUrl</param-name>
-      <param-value>http://localhost:8080/cas/login</param-value>
+      <param-value>https://www.sifenggu.com/cas/login</param-value>
     </init-param>
+    这里的server是服务端的IP
     <init-param>
       <param-name>serverName</param-name>
       <param-value>http://localhost:9090</param-value>
@@ -71,13 +82,20 @@
     <filter-name>CASFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  该过滤器负责对Ticket的校验工作，必须启用它 ,如果要从服务器获取用户名之外的更多信息应该采用cas20这个2.0协议的代理
   <filter>
     <filter-name>CAS Validation Filter</filter-name>
     <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
+     casServerUrlPrefix  参数的值是cas 服务的访问地址。
+    	  cas client 验证ticket 的时候，要访问cas 服务的/serviceValidate 接口，
+    	     使用的url 就是${ casServerUrlPrefix }serviceValidate ，因为客户web 应用要验证cas 的证书，
+    	     所以证书cn 字段的值必须和casServerUrlPrefix 里设置的cas 服务器的域名保持一致，并且在web 应用的服务器上配置cas 服务的访问域名。 
     <init-param>
       <param-name>casServerUrlPrefix</param-name>
-      <param-value>http://localhost:8080/cas</param-value>
+      <param-value>https://www.sifenggu.com/cas</param-value>
     </init-param>
+    serverName 参数，cas client 会用来生成service 参数，并且cas 服务器在认证通过、ticket 验证通过后，
+    	会redirect 到web 应用，redirect 的url 就是service 参数的值。serverName 参数可以是IP ，也可以是域名，只要保证浏览器能访问到即可。
     <init-param>
       <param-name>serverName</param-name>
       <param-value>http://localhost:9090</param-value>
@@ -87,6 +105,10 @@
     <filter-name>CAS Validation Filter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+	该过滤器负责实现HttpServletRequest请求的包裹，
+	比如允许开发者通过HttpServletRequest的getRemoteUser()方法获得SSO登录用户的登录名，可选配置。
+ 
   <filter>
     <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
     <filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
@@ -95,6 +117,10 @@
     <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+	该过滤器使得开发者可以通过org.jasig.cas.client.util.AssertionHolder来获取用户的登录名。
+	比如AssertionHolder.getAssertion().getPrincipal().getName()。
+  
   <filter>
     <filter-name>CAS Assertion Thread Local Filter</filter-name>
     <filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class>
@@ -103,6 +129,7 @@
     <filter-name>CAS Assertion Thread Local Filter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  自动根据单点登录的结果设置本系统的用户信息
   <filter>
     <display-name>AutoSetUserAdapterFilter</display-name>
     <filter-name>AutoSetUserAdapterFilter</filter-name>
@@ -111,7 +138,10 @@
   <filter-mapping>
     <filter-name>AutoSetUserAdapterFilter</filter-name>
     <url-pattern>/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping> -->
+  <!-- 单点登陆配置结束 -->
+
+  <!-- CXF配置开始-->
   <servlet>
     <servlet-name>CXFServlet</servlet-name>
     <servlet-class>
@@ -123,4 +153,5 @@
     <servlet-name>CXFServlet</servlet-name>
     <url-pattern>/webservice/*</url-pattern>
   </servlet-mapping>
+  <!-- CXF配置结束 -->
 </web-app>

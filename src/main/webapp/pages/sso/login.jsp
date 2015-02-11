@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/common/css/font-awesome.min.css"/>">
     <!--[if IE 7]>
 	<link rel="stylesheet" href="<c:url value="/resources/common/js/css/ltie/font-awesome-ie7.min.css"/>">
-		<![endif]-->
+	<![endif]-->
 </head>
 <body>
 <!--[if lt IE 11]>
