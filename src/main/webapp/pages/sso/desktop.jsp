@@ -52,6 +52,7 @@
 			<!-- END-顶部右侧信息 -->
   		</div>
 	</div>
+	</div>
 </nav>
 <!-- main content -->
 <div id="slider"  class="container-fluid slidect" >

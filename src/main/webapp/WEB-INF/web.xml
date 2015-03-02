@@ -44,6 +44,16 @@
     <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  <!-- sitemesh配置开始 -->
+  <filter>
+    <filter-name>sitemesh</filter-name>
+    <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <!-- sitemesh配置结束 -->
   <!-- 单点登陆配置开始 -->
   <!-- 用于单点退出，该过滤器用于实现单点登出功能，可选配置-->
  <!--  <listener>

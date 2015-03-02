@@ -41,7 +41,9 @@ dependencies {
 	          	//apache io工具包,该包提供了FileWriterWithEncoding等工具类
 	          	"commons-io:commons-io:+",
 	          	//POI依赖
-	          	"org.apache.poi:poi-ooxml:3.10+"
+	          	"org.apache.poi:poi-ooxml:3.10+",
+	          	//sitemesh依赖
+	          	"org.sitemesh:sitemesh:+"
           	
     testCompile 	 "junit:junit:4.7"
     providedCompile  "javax.servlet:servlet-api:2.5"

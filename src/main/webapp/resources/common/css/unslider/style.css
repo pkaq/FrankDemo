@@ -84,6 +84,14 @@ html, body {
 	height: 667px;
 	width: 100%;
 }
+
+.formct {
+	position: relative;
+	margin-top: 90px;
+	width: 600px;
+	left: 50%;
+	margin-left: -300px;
+}
 /**slider 滚动区域样式**/
 .slider {
 	list-style: none;
@@ -95,7 +103,6 @@ html, body {
 	background-image: url("../../image/unslide/grid.png");
 	background: #f9f9f9;
 }
-
 .slider li {
 	float: left;
 	margin: 0;
@@ -118,7 +125,6 @@ html, body {
 	bottom: 20px;
 	list-style-type:circle;
 }
-
 .dots li {
 	display: inline-block;
 	width: 10px;
@@ -133,7 +139,6 @@ html, body {
 	-moz-transition: background .5s, opacity .5s;
 	transition: background .5s, opacity .5s;
 }
-
 .dots li.active {
 	background: #fff;
 	opacity: 1;

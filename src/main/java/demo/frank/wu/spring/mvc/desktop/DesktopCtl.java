@@ -20,4 +20,22 @@ public class DesktopCtl {
         System.err.println("desktop...");
         return "sso/desktop";
     }
+    
+    @RequestMapping("/register")
+    public String register(){
+        System.err.println("register...");
+        return "sso/register";
+    }
+    
+    @RequestMapping("/getpassword")
+    public String getpassword(){
+        System.err.println("getpassword...");
+        return "sso/getpassword";
+    }
+    
+    @RequestMapping("/resetpassword")
+    public String resetpassword(){
+        System.err.println("resetpassword...");
+        return "sso/resetpassword";
+    }
 }
